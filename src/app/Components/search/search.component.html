@@ -1,0 +1,99 @@
+<div class="container">
+
+    <div class="row py-3">
+
+        <!-- Search form collumn -->
+        <div class="col-md-5 mx-auto form">
+
+            <div class="text-center">
+                <h1>Seach Reports By Date</h1>
+                <hr>
+                <p>Filter reports by date. Open the calendar from the form below and check previous reports.</p>
+            </div>
+
+            <hr class="mb-2">
+
+            <form [formGroup]="dateForm" (ngSubmit)="datesearch()">
+
+                <div class="form-group">
+
+                    <label for="date">Enter Date:</label>
+                    <br>
+                    <input type="date" id="date" name="date" formControlName="date">
+
+                </div>
+
+                <button class="btn btn-primary btn-rounded mt-3" type="submit" [disabled]="date?.invalid">Get
+                    Reports</button>
+
+            </form>
+
+        </div>
+
+        <hr class="mt-4">
+
+        <!-- Displaying results -->
+        <div class="col-md-12 py-3">
+
+            <!-- Sales -->
+            <h2 class="text-center" *ngIf="sales.length > 0">SALES</h2>
+            <hr *ngIf="sales.length > 0">
+            <div class="sales mt-2" *ngIf="sales.length > 0">
+
+                <ul *ngFor="let sale of sales">
+                    <li class="text-bg-success p-2">{{sale.clientsname | uppercase}}</li>
+                    <p><span class="text-primary">Product's name: </span>{{sale.productname}}</p>
+                    <p><span class="text-primary">Quantity: </span>{{sale.quantity}}</p>
+                    <p><span class="text-primary">Payment method: </span>{{sale.payment}}</p>
+                    <p><span class="text-primary">Transaction code:</span> {{sale.transactioncode}}</p>
+                    <p><span class="text-primary">Total cost:</span> {{sale.clienttotal}}</p>
+                    <p><span class="text-primary">Buying cost:</span> {{sale.buyingtotal}}</p>
+                    <p *ngIf="sale.projection > 0"><span class="text-black bg-primary p-2">Projection:</span>
+                        {{sale.projection}}</p>
+                    <p *ngIf="sale.projection < 0"><span class="text-black bg-danger p-2">Projection:</span>
+                        {{sale.projection}}</p>
+
+                </ul>
+
+            </div>
+            <hr>
+
+            <!-- Cyber services -->
+
+            <h2 class="text-center" *ngIf="cyberservices.length > 0">CYBER SERVICES</h2>
+            <hr *ngIf="cyberservices.length > 0">
+            <div class="cyberservices mt-2" *ngIf="cyberservices.length > 0">
+
+                <ul *ngFor="let service of cyberservices">
+                    <li class="text-bg-success p-2">{{service.clientsname | uppercase}}</li>
+                    <p><span class="text-primary">Service name: </span>{{service.servicename}}</p>
+                    <p><span class="text-primary">Payment method: </span>{{service.payment}}</p>
+                    <p><span class="text-primary">Transaction code: </span>{{service.transactioncode}}</p>
+                    <p><span class="text-primary">Quantity </span>{{service.quantity}}</p>
+                    <P><span class="text-primary">Total cost: </span>{{service.totalcost}}</P>
+                </ul>
+
+            </div>
+
+            <hr>
+
+            <!-- Expenses -->
+
+            <h2 class="text-center" *ngIf="expenses.length > 0">EXPENSES</h2>
+            <hr *ngIf="expenses.length > 0">
+            <div class="expenses mt-2" *ngIf="expenses.length > 0">
+
+                <ul *ngFor="let expense of expenses">
+                    <li class="text-bg-success p-2">{{expense.name | uppercase}}</li>
+                    <p><span class="text-primary">Description: </span>{{expense.description}}</p>
+                    <p><span class="text-primary">Total cost: </span>{{expense.totalcost}} </p>
+                </ul>
+
+            </div>
+            <hr>
+
+        </div>
+
+    </div>
+
+</div>

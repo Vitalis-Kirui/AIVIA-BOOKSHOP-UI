@@ -1,0 +1,55 @@
+<div class="container pt-5">
+
+    <div class="text-center">
+        <h1>EXPENSES</h1>
+        <hr>
+        <p>Register any expense incurred in the form below</p>
+    </div>
+
+    <!-- Expense form -->
+    <form action="" [formGroup]="expenseform" (ngSubmit)="submitexpense()">
+
+        <!-- Name -->
+        <div class="form-group">
+            <label for="" class="my-3 mb-1">Name</label>
+            <input type="text" class="form-control" name="name" formControlName="name"
+            [class.is-invalid]="name?.invalid && name?.dirty"
+            >
+
+            <!-- Error message -->
+            <small class="text-danger" *ngIf="name?.invalid && name?.dirty">Required</small>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="" class="my-3 mb-1">Description</label>
+            <textarea name="description" id="" cols="30" rows="5" class="form-control"
+                formControlName="description" 
+                [class.is-invalid]="description?.invalid && description?.dirty"
+                ></textarea>
+
+                <!-- Error message -->
+                <small class="text-danger" *ngIf="description?.invalid && description?.dirty">Required</small>
+        </div>
+
+        <!-- Total cost -->
+        <div class="form-group">
+            <label for="" class="my-3 mb-1">Total Cost</label>
+            <input type="number" class="form-control" name="totalcost" formControlName="totalcost"
+            [class.is-invalid]="totalcost?.invalid && totalcost?.dirty"
+            >
+
+            <!-- Error message -->
+            <small class="text-danger" *ngIf="totalcost?.invalid && totalcost?.dirty">Required</small>
+        </div>
+
+        <!-- Submit button -->
+        <button class="btn btn-primary btn-rounded m-2" type="submit" [disabled]="expenseform.invalid">Submit</button>
+
+    </form>
+
+    <!-- Go back button -->
+    <hr>
+    <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="goback()">Go Back</button>
+
+</div>

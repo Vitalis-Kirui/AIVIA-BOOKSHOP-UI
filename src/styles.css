@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    padding: 0;
+    margin: o;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+
+/* Universal styles */
+h1{
+    font-weight: 800;
+}
+
+button{
+    font-size: 13px !important;
+}
+
+p{
+    font-size: 18px;
+}

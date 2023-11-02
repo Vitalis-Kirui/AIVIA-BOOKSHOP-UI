@@ -1,0 +1,117 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="text-center pt-3">
+            <h1>REPORTS</h1>
+            <p>Welcome to daily reports on sales, cyber services and expenses</p>
+            <hr>
+        </div>
+
+        <!-- Daily reports -->
+        <!-- Sales -->
+        <div class="col-md-4 my-3">
+
+            <div class="text-center pt-2">
+                <h1>Today's Sales</h1>
+                <hr>
+                <p>These are today's sales</p>
+            </div>
+
+            <div class="bg-warning p-2">
+                <p>Number of stocks sold: {{totalstocksold}}</p>
+                <p>Worth of stocks sold: {{totalsoldworth}}</p>
+                <p>Earnings from stock sold: {{totalsoldearnings}}</p>
+                <p *ngIf="totalsoldearnings - totalsoldworth > 0">Projection: {{totalsoldearnings-totalsoldworth}} <span
+                        class="text-bg-success p-2">Profit</span></p>
+                <p *ngIf="totalsoldearnings - totalsoldworth < 0">Projection: {{totalsoldearnings-totalsoldworth}} <span
+                        class="text-bg-success p-2">Loss</span></p>
+            </div>
+
+            <div class="sales mt-2">
+
+                <ul *ngFor="let sale of sales">
+                    <li class="text-bg-success p-2">{{sale.clientsname | uppercase}}</li>
+                    <p><span class="text-primary">Product's name: </span>{{sale.productname}}</p>
+                    <p><span class="text-primary">Quantity: </span>{{sale.quantity}}</p>
+                    <p><span class="text-primary">Payment method: </span>{{sale.payment}}</p>
+                    <p><span class="text-primary">Transaction code:</span> {{sale.transactioncode}}</p>
+                    <p><span class="text-primary">Total cost:</span> {{sale.clienttotal}}</p>
+                    <p><span class="text-primary">Buying cost:</span> {{sale.buyingtotal}}</p>
+                    <p *ngIf="sale.projection > 0"><span class="text-black bg-primary p-2">Projection:</span>
+                        {{sale.projection}}</p>
+                    <p *ngIf="sale.projection < 0"><span class="text-black bg-danger p-2">Projection:</span>
+                        {{sale.projection}}</p>
+
+                </ul>
+
+            </div>
+
+            <!-- Full report button -->
+            <button class="btn btn-info m-2 btn-rounded" type="button" (click)="salesfullreport()">Full Report</button>
+
+        </div>
+
+        <!--Cyber services  -->
+        <div class="col-md-4 my-3">
+
+            <div class="text-center pt-2">
+                <h1>Today's Cyber Services</h1>
+                <hr>
+                <p>These are today's registered cyber services</p>
+                <p class="p-2 bg-warning">Total cyber services: {{totalservices}}</p>
+                <p class="p-2 bg-warning">Total cyber earning today sums to: {{totalcyberearnings}}</p>
+            </div>
+
+            <div class="cyberservices mt-2">
+
+                <ul *ngFor="let service of cyberservices">
+                    <li class="text-bg-success p-2">{{service.clientsname | uppercase}}</li>
+                    <p><span class="text-primary">Service name: </span>{{service.servicename}}</p>
+                    <p><span class="text-primary">Payment method: </span>{{service.payment}}</p>
+                    <p><span class="text-primary">Transaction code: </span>{{service.transactioncode}}</p>
+                    <p><span class="text-primary">Quantity </span>{{service.quantity}}</p>
+                    <P><span class="text-primary">Total cost: </span>{{service.totalcost}}</P>
+                </ul>
+
+            </div>
+
+            <!-- Full report button -->
+            <button class="btn btn-info m-2 btn-rounded" type="button" (click)="cyberfullreport()">Full Report</button>
+
+        </div>
+
+        <!-- Expenses -->
+        <div class="col-md-4 my-3">
+
+            <div class="text-center pt-2">
+                <h1>Today's Expenses</h1>
+                <hr>
+                <p>These are today's expenses</p>
+                <p class="p-2 bg-warning">Total  number of expenses today: {{totalexpenses}}</p>
+                <p class="p-2 bg-warning">Total expenses today sums to: {{todaystotalexpenses}}</p>
+            </div>
+
+            <div class="expenses mt-2">
+
+                <ul *ngFor="let expense of expenses">
+                    <li class="text-bg-success p-2">{{expense.name | uppercase}}</li>
+                    <p><span class="text-primary">Description: </span>{{expense.description}}</p>
+                    <p><span class="text-primary">Total cost: </span>{{expense.totalcost}} </p>
+                </ul>
+
+            </div>
+
+            <!-- Full report button -->
+            <button class="btn btn-info m-2 btn-rounded" type="button" (click)="expensesfullreport()">Full
+                Report</button>
+
+        </div>
+
+    </div>
+
+    <!-- Go back function -->
+    <hr>
+    <button class="btn btn-secondary m-2 btn-rounded" type="button" (click)="goback()">Go Back</button>
+
+</div>

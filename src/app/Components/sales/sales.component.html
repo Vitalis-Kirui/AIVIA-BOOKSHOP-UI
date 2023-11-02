@@ -1,0 +1,90 @@
+<div class="container pt-5">
+
+    <div class="text-center">
+
+        <h1>Sales Register</h1>
+        <hr>
+
+    </div>
+
+    <!-- Sales form -->
+    <form class="salesform" [formGroup]="salesform" (ngSubmit)="additem()">
+
+        <!-- Client's name -->
+        <div class="form-group">
+            <label for="" class="mb-1 my-2">Client's Name</label>
+            <input type="text" class="form-control" name="clientsname" formControlName="clientsname"
+                [class.is-invalid]="clientname?.invalid && clientname?.dirty">
+
+            <!-- Error messages -->
+            <div class="text-danger" *ngIf="clientname?.invalid && clientname?.dirty">
+                <small *ngIf="clientname?.errors?.['required']">Required</small>
+                <small *ngIf="clientname?.errors?.['minlength']">At least 3 characters</small>
+            </div>
+        </div>
+
+        <!-- Product name -->
+        <div class="my-3">
+            <p class="label">Product | Item name</p>
+            <select class="custom-select" name="productname" (change)="changeproduct($event)" 
+                formControlName="productname" [class.is-invalid]="itemname?.invalid && itemname?.dirty">
+                <option *ngFor="let stock of allstocks" [value]="stock.productname">{{stock.productname}}</option>
+            </select>
+
+            <!-- Error message -->
+            <small class="text-danger" *ngIf="itemname?.invalid && itemname?.dirty">Required</small>
+        </div>
+
+        <!-- Quantity -->
+        <div class="form-group">
+            <label for="" class="mb-1 my-3">Quantity</label>
+            <input type="number" class="form-control" name="quantity" formControlName="quantity"
+                [class.is-invalid]="quantity?.invalid && quantity?.dirty">
+
+            <!-- Error message -->
+            <small class="text-danger" *ngIf="quantity?.invalid && quantity?.dirty">Required</small>
+
+        </div>
+
+        <!-- Mode of payment -->
+        <div class="my-3">
+            <p class="label">Mode of Payment</p>
+            <label>
+                <input type="radio" formControlName="payment" value="m-pesa">
+                M-pesa
+            </label>
+            <br>
+            <label>
+                <input type="radio" formControlName="payment" value="cheque">
+                Cheque
+            </label>
+            <br>
+            <label>
+                <input type="radio" formControlName="payment" value="cash">
+                Cash
+            </label>
+            <br>
+
+        </div>
+
+        <!-- Transaction code -->
+        <div class="form-group">
+            <label for="" class="mb-1 my-3">Transaction Code</label>
+            <input type="text" class="form-control" name="transactioncode" formControlName="transactioncode"
+                [class.is-invalid]="code?.invalid && code?.dirty">
+
+            <!-- Error message -->
+            <small class="text-danger" *ngIf="code?.invalid">Required for M-pesa | Cheque transactions</small>
+        </div>
+
+        <!-- Submit item button -->
+        <button class="btn btn-rounded btn-primary m-3" type="submit" [disabled]="salesform.invalid">Add Item</button>
+
+    </form>
+
+    <hr>
+
+    <!-- Go Back function -->
+    <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="goback()">Go Back</button>
+
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+
+    <div class="row">
+
+        <!-- Heading -->
+        <div class="text-center pt-3">
+            <h2>STAFF FULL DETAILS</h2>
+            <hr>
+        </div>
+
+        <div class="col-md-8 mx-auto py-3" *ngFor="let details of staffdetails">
+
+            <div class="text-center">
+                <h1>{{details.firstname}} {{details.secondname}}</h1>
+                <hr>
+            </div>
+
+            <ul>
+                <li><span class="text-primary">National ID: </span>{{details.nationalid}}</li>
+                <li><span class="text-primary">Phone number: </span>{{details.phonenumber}}</li>
+                <li><span class="text-primary">Age: </span>{{details.age}}</li>
+                <li><span class="text-primary">Role | Rank: </span>{{details.role}}</li>
+                <li><span class="text-primary">Workstation: </span>{{details.workstation}}</li>
+                <li><span class="text-primary">Monthly Salary: </span>{{details.monthlysalary}}</li>
+                <li><span class="text-primary">Gender: </span>{{details.gender}}</li>
+                <li><span class="text-primary">Date Registered: </span>{{details.createdAt | date | uppercase}}
+                </li>
+            </ul>
+
+            <!-- Actions buttons -->
+            <button class="btn btn-danger btn-rounded m-2" type="button" (click)="deletestaff(details._id)">Delete Staff</button>
+            <button class="btn btn-primary btn-rounded m-2" type="button" (click)="updatestaff(details._id)">Update Staff</button>
+
+        </div>
+
+        <!-- Go back button -->
+        <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="backtostaffs()">Go Back</button>
+
+    </div>
+
+</div>

@@ -1,0 +1,211 @@
+<div class="container pt-5">
+
+    <div class="text-center introduction">
+
+        <h1>AIVA Staffs</h1>
+        <hr>
+        <p>Access staff's details and add new staff to the system.</p>
+
+        <!-- Buttons choice -->
+        <button class="btn btn-info btn-rounded m-3" type="button" (click)="existingstaffs()">Staffs</button>
+        <button class="btn btn-primary btn-rounded m-3" type="button" (click)="addstaff()">Add Staff</button>
+
+
+    </div>
+
+    <div class="row pt-5">
+
+        <!-- Existing staff details -->
+        <div class="col-md-6 existingdetails mx-auto" *ngIf="seeexistingstaffs">
+
+            <div>
+                <h2 class="text-center">Your Staffs</h2>
+                <hr>
+
+                <div class="allstaffs" *ngFor="let staff of allstaffs">
+
+                    <div class="text-start">
+                        <h1>{{staff.firstname}} {{staff.secondname}}</h1>
+                    </div>
+
+                    <ul>
+                        <li><span class="text-primary">National ID: </span>{{staff.nationalid}}</li>
+                        <li><span class="text-primary">Phone number: </span>{{staff.phonenumber}}</li>
+                        <li><span class="text-primary">Age: </span>{{staff.age}}</li>
+                        <li><span class="text-primary">Role | Rank: </span>{{staff.role}}</li>
+                        <li><span class="text-primary">Workstation: </span>{{staff.workstation}}</li>
+                        <li><span class="text-primary">Monthly Salary: </span>{{staff.monthlysalary}}</li>
+                        <li><span class="text-primary">Gender: </span>{{staff.gender}}</li>
+                        <li><span class="text-primary">Date Registered: </span>{{staff.createdAt | date | uppercase}}
+                        </li>
+                    </ul>
+
+                    <!-- Expand function -->
+                    <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="expandstaff(staff._id)">Expand</button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Adding new staff form -->
+        <div class="col-md-6 newstaff mx-auto" *ngIf="addnewstaff">
+
+            <div class="text-center">
+                <h2>Add new staff details</h2>
+                <hr>
+                <p>Use the form below to add new staff details to the system</p>
+            </div>
+
+            <!-- Add new staff form -->
+            <div class="form pt-3">
+
+                <form action="" [formGroup]="newstaffform" (ngSubmit)="submitstaff()">
+
+                    <!-- First name -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">First Name</label>
+                        <input type="text" class="form-control" name="firstname" formControlName="firstname"
+                            [class.is-invalid]="firstname?.invalid && firstname?.dirty">
+
+                        <!-- Error messages -->
+                        <div class="text-danger" *ngIf="firstname?.invalid && firstname?.dirty">
+                            <small *ngIf="firstname?.errors?.['required']">Required</small>
+                            <small *ngIf="firstname?.errors?.['minlength']">At least 3 characters</small>
+                        </div>
+
+                    </div>
+
+                    <!-- Second name -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Second Name</label>
+                        <input type="text" class="form-control" name="secondname" formControlName="secondname"
+                            [class.is-invalid]="secondname?.invalid && secondname?.dirty">
+
+                        <!-- Error messages -->
+                        <div class="text-danger" *ngIf="secondname?.invalid && secondname?.dirty">
+                            <small *ngIf="secondname?.errors?.['required']">Required</small>
+                            <small *ngIf="secondname?.errors?.['minlength']">At least 3 characters</small>
+                        </div>
+
+                    </div>
+
+                    <!-- National id -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">National ID</label>
+                        <input type="number" class="form-control" name="nationalid" formControlName="nationalid"
+                            [class.is-invalid]="id?.invalid && id?.dirty">
+
+                        <!-- Error messages -->
+                        <div class="text-danger" *ngIf="id?.invalid && id?.dirty">
+                            <small *ngIf="id?.errors?.['required']">Required</small>
+                            <small *ngIf="id?.errors?.['minlength']">At least 6 characters</small>
+                        </div>
+
+                    </div>
+
+                    <!-- Phone number -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Phone Number</label>
+                        <input type="number" class="form-control" name="phonenumber" formControlName="phonenumber"
+                            [class.is-invalid]="phonenumber?.invalid && phonenumber?.dirty">
+
+                        <!-- Error messages -->
+                        <div class="text-danger" *ngIf="phonenumber?.invalid && phonenumber?.dirty">
+                            <small *ngIf="phonenumber?.errors?.['required']">Required</small>
+                            <small *ngIf="phonenumber?.errors?.['minlength']">At least 10 characters</small>
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Age</label>
+                        <input type="number" class="form-control" name="age" formControlName="age"
+                            [class.is-invalid]="age?.invalid && age?.dirty">
+
+                        <!-- Error messages -->
+                        <div class="text-danger" *ngIf="age?.invalid && age?.dirty">
+                            <small *ngIf="age?.errors?.['required']">Required</small>
+                            <small *ngIf="age?.errors?.['minlength']">At least 2 characters</small>
+                        </div>
+                    </div>
+
+                    <!-- Profile photo -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Image</label>
+                        <input type="file" class="form-control" name="image" formControlName="image">
+                    </div>
+
+                    <!-- Rank or Role -->
+                    <div class="my-3">
+                        <p class="label">Role | Rank</p>
+                        <select class="custom-select" (change)="changerank($event)" name="role" formControlName="role"
+                            [class.is-invalid]="role?.invalid && role?.dirty">
+                            <option *ngFor="let role of roles" [ngValue]="role">{{role}}</option>
+                        </select>
+
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="role?.invalid && role?.dirty">Required</small>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="my-3">
+                        <p class="label">Gender</p>
+                        <label>
+                            <input type="radio" formControlName="gender" value="male">
+                            Male
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="radio" formControlName="gender" value="female">
+                            Female
+                        </label>
+
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="gender?.invalid && gender?.dirty">Required</small>
+                    </div>
+
+
+                    <!-- Work station -->
+                    <div class="my-3">
+                        <p class="label">Work Station</p>
+                        <select class="custom-select" (change)="changestation($event)" name="workstation"
+                            formControlName="workstation"
+                            [class.is-invalid]="workstation?.invalid && workstation?.dirty">
+                            <option *ngFor="let station of stations" [ngValue]="station">{{station}}</option>
+                        </select>
+
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="workstation?.invalid && workstation?.dirty">Required</small>
+                    </div>
+
+                    <!-- Salary -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Monthly Salary</label>
+                        <input type="number" class="form-control" name="monthlysalary" formControlName="monthlysalary"
+                            [class.is-invalid]="salary?.invalid && salary?.dirty">
+
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="salary?.invalid && salary?.dirty">Required</small>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button class="btn btn-primary btn-rounded m-3" type="submit"
+                        [disabled]="newstaffform.invalid">Submit</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- Back to menu button -->
+    <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="goback()">Go Back</button>
+
+
+</div>

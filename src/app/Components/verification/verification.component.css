@@ -1,0 +1,18 @@
+form{
+    width: 30%;
+    margin: auto;
+}
+
+label{
+    font-weight: 500;
+    color: rgb(5, 5, 92);
+    font-size: 18px;
+}
+
+button:hover{
+    font-size: 15px;
+}
+
+small{
+    font-weight: 500;
+}

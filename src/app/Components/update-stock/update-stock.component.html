@@ -1,0 +1,85 @@
+<div class="container">
+
+    <div class="row py-3">
+
+        <div class="col-md-8 mx-auto">
+
+            <div class="text-center">
+                <h2>UPDATE STOCK FORM</h2>
+                <hr>
+            </div>
+
+            <!-- Update form -->
+            <div class="form pt-3">
+
+                <form action="" [formGroup]="stockupdateform" (ngSubmit)="updatestock()">
+                
+                    <!-- Product's name -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-2">Product Name</label>
+                        <input type="text" class="form-control" name="productname" formControlName="productname"
+                            [class.is-invalid]="name?.invalid && name?.dirty">
+                
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="name?.invalid && name?.dirty">Required</small>
+                
+                    </div>
+                
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Product Description</label>
+                        <input type="text" class="form-control" name="description" formControlName="description">
+                    </div>
+                
+                    <!-- Quantity -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Quanity</label>
+                        <input type="number" class="form-control" name="quantity" formControlName="quantity"
+                            [class.is-invalid]="quantity?.invalid && quantity?.dirty">
+                
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="quantity?.invalid && quantity?.dirty">Required</small>
+                
+                
+                    </div>
+                
+                    <!-- Buying Price -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Buying Price/Item</label>
+                        <input type="number" class="form-control" name="buyingprice" formControlName="buyingprice"
+                            [class.is-invalid]="buyingprice?.invalid && buyingprice?.dirty">
+                
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="buyingprice?.invalid && buyingprice?.dirty">Required</small>
+                
+                
+                    </div>
+                
+                    <!-- Selling price -->
+                    <div class="form-group">
+                        <label for="" class="mb-1 my-3">Selling Price/Item</label>
+                        <input type="number" class="form-control" name="sellingprice" formControlName="sellingprice"
+                            [class.is-invalid]="sellingprice?.invalid && sellingprice?.dirty">
+                
+                        <!-- Error message -->
+                        <small class="text-danger" *ngIf="sellingprice?.invalid && sellingprice?.dirty">Required</small>
+                
+                
+                    </div>
+                
+                    <!-- Addition button -->
+                    <button class="btn btn-primary btn-rounded m-3" type="submit" [disabled]="stockupdateform.invalid">Update</button>
+                
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Back function -->
+        <hr>
+        <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="goback()">Go Back</button>
+
+    </div>
+
+</div>

@@ -1,0 +1,155 @@
+<div class="container">
+
+    <!-- What to display buttons -->
+    <div class="text-center pt-3">
+        <button class="btn btn-primary btn-rounded m-2" type="button" (click)="addstock()">Add Stock</button>
+        <button class="btn btn-primary btn-rounded m-2" type="button" (click)="seestock()">See Stock</button>
+    </div>
+
+    <!-- Addition form -->
+    <div class="form" *ngIf="addingstock">
+
+        <!-- Introduction -->
+        <div class="text-center pt-5">
+            <h2>Registering New Stock</h2>
+            <hr>
+            <p>The form below is for adding new stock to the system</p>
+
+        </div>
+
+        <form action="" [formGroup]="stockadditionform" (ngSubmit)="additem()">
+
+            <!-- Product's name -->
+            <div class="form-group">
+                <label for="" class="mb-1 my-2">Product Name</label>
+                <input type="text" class="form-control" name="productname" formControlName="productname"
+                    [class.is-invalid]="name?.invalid && name?.dirty">
+
+                <!-- Error message -->
+                <small class="text-danger" *ngIf="name?.invalid && name?.dirty">Required</small>
+
+            </div>
+
+            <!-- Description -->
+            <div class="form-group">
+                <label for="" class="mb-1 my-3">Product Description</label>
+                <input type="text" class="form-control" name="description" formControlName="description">
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+                <label for="" class="mb-1 my-3">Quanity</label>
+                <input type="number" class="form-control" name="quantity" formControlName="quantity"
+                    [class.is-invalid]="quantity?.invalid && quantity?.dirty">
+
+                <!-- Error message -->
+                <small class="text-danger" *ngIf="quantity?.invalid && quantity?.dirty">Required</small>
+
+
+            </div>
+
+            <!-- Buying Price -->
+            <div class="form-group">
+                <label for="" class="mb-1 my-3">Buying Price/Item</label>
+                <input type="number" class="form-control" name="buyingprice" formControlName="buyingprice"
+                    [class.is-invalid]="buyingprice?.invalid && buyingprice?.dirty">
+
+                <!-- Error message -->
+                <small class="text-danger" *ngIf="buyingprice?.invalid && buyingprice?.dirty">Required</small>
+
+
+            </div>
+
+            <!-- Selling price -->
+            <div class="form-group">
+                <label for="" class="mb-1 my-3">Selling Price/Item</label>
+                <input type="number" class="form-control" name="sellingprice" formControlName="sellingprice"
+                    [class.is-invalid]="sellingprice?.invalid && sellingprice?.dirty">
+
+                <!-- Error message -->
+                <small class="text-danger" *ngIf="sellingprice?.invalid && sellingprice?.dirty">Required</small>
+
+
+            </div>
+
+            <!-- Addition button -->
+            <button class="btn btn-primary btn-rounded m-3" type="submit" [disabled]="stockadditionform.invalid">Add
+                Item</button>
+
+        </form>
+
+
+    </div>
+
+    <!-- Avaible stock display -->
+    <div class="col-md-8 mx-auto pt-3" *ngIf="seeingstock">
+
+        <div class="text-center">
+            <h2>Available stock</h2>
+            <hr>
+        </div>
+
+        <!-- Existing stock -->
+        <div class="allstocks" *ngFor="let stock of allstocks">
+            <hr>
+            <ul>
+                <li><span class="text-primary">Name: </span>{{stock.productname}}</li>
+                <li><span class="text-primary">Quantity: </span>{{stock.quantity}} <span class="text-bg-danger p-2"
+                        *ngIf="stock.quantity < 1">Out of stock</span></li>
+                <li><span class="text-primary">Description: </span>{{stock.description}}</li>
+                <li><span class="text-primary">Buying price: </span>{{stock.buyingprice}}</li>
+                <li><span class="text-primary">Selling price: </span>{{stock.sellingprice}}</li>
+
+                <!-- Totals -->
+                <div class="totals py-2">
+
+                    <p><span class="text-success p-2">Total buying price:</span> {{stock.quantity * stock.buyingprice}}
+                    </p>
+
+                    <p><span class="text-success p-2">Total worth by selling prices:</span> {{stock.quantity *
+                        stock.sellingprice}}</p>
+
+                    <p><span class="text-success p-2">Expected profit:</span> {{((stock.quantity *
+                        stock.sellingprice)-(stock.quantity * stock.buyingprice))}}</p>
+
+                </div>
+
+                <!-- Update button -->
+                <button class="btn btn-primary btn-rounded m-2" type="button"
+                    (click)="openstock(stock._id)">Open</button>
+                <hr>
+
+            </ul>
+
+        </div>
+
+        <!-- Grand Totals and projects -->
+        <hr>
+        <div class="col-md-6 mx-auto text-center text-primary py-3">
+            <h1>Grand Stock Totals and Projections</h1>
+            <hr>
+        </div>
+
+        <p>Total Stock's Cost: <span class="text-primary bg-warning p-2">{{totalbuyingprices}}</span></p>
+        <p>Total Earning Projections: <span class="text-primary bg-warning p-2">{{totalsellingprices}}</span></p>
+
+        <!-- Projection -->
+        <div class="projection py-3">
+            <p *ngIf="(totalsellingprices - totalbuyingprices) > 1">PROJECTION: <span
+                    class="text-primary">{{(totalsellingprices - totalbuyingprices)}}</span> <span
+                    class="text-bg-success p-3">Profit</span></p>
+            <p *ngIf="(totalsellingprices - totalbuyingprices) < 0">PROJECTION: <span
+                    class="text-primary">{{(totalsellingprices - totalbuyingprices)}}</span> <span
+                    class="text-bg-danger p-3">Loss</span></p>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- Go back to menu button -->
+    <button class="btn btn-secondary btn-rounded m-3" type="button" (click)="goback()">Go Back</button>
+
+
+</div>

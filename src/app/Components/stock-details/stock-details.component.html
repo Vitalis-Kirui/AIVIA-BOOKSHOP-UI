@@ -1,0 +1,42 @@
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-8 mx-auto">
+
+            <div class="text-center py-3">
+                <h2>STOCK FULL DETAILS</h2>
+                <hr>
+            </div>
+
+            <div class="details" *ngFor="let stock of stockdetails">
+
+                <div class="text-center">
+                    <h3>{{stock.productname}}</h3>
+                    <hr>
+                </div>
+
+                <ul>
+                    <li><span class="text-primary">Quantity: </span>{{stock.quantity}}</li>
+                    <li><span class="text-primary">Description: </span>{{stock.description}}</li>
+                    <li><span class="text-primary">Buying price: </span>{{stock.buyingprice}}</li>
+                    <li><span class="text-primary">Selling price: </span>{{stock.sellingprice}}</li>
+                </ul>
+
+                <!-- Actions buttons -->
+                <button class="btn btn-danger btn-rounded m-2" type="button" (click)="deletestock(stock._id)">Delete Stock</button>
+                <button class="btn btn-primary btn-rounded m-2" type="button" (click)="updatestock(stock._id)">Update Stock</button>
+
+            </div>
+
+        </div>
+
+        <div class="goback pt-2">
+            <hr>
+            <!-- Go back button -->
+            <button class="btn btn-secondary btn-rounded m-2" type="button" (click)="backtostocks()">Go Back</button>
+        </div>
+
+    </div>
+
+</div>

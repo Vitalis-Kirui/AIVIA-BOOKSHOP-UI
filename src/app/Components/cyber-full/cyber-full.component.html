@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="text-center py-3">
+        <h1>Cyber Services Full Report</h1>
+        <hr>
+        <p>These is a full report on cyber services</p>
+    </div>
+
+    <div class="col-md-5 mx-auto py-2">
+
+        <h2>Grand total earnings from cyber services</h2>
+        <hr>
+        <p class="bg-info p-3">Ksh: {{grandtotal}}</p>
+
+    </div>
+
+    <!-- Full report -->
+    <div class="col-md-8 mx-auto pt-2">
+
+        <div class="cyberservices mt-2">
+        
+            <ul *ngFor="let service of cyberservices">
+                <li class="text-bg-secondary p-2">{{service.clientsname | uppercase}}</li>
+                <p><span class="text-primary">Service name: </span>{{service.servicename}}</p>
+                <p><span class="text-primary">Payment method: </span>{{service.payment}}</p>
+                <p><span class="text-primary">Transaction code: </span>{{service.transactioncode}}</p>
+                <p><span class="text-primary">Quantity: </span>{{service.quantity}}</p>
+                <P><span class="text-primary">Total cost: </span>{{service.totalcost}}</P>
+                <p><span class="text-primary">Date: </span>{{service.createdAt | date | uppercase}}</p>
+            </ul>
+        
+        </div>
+
+    </div>
+
+    <hr>
+    <!-- Go back to reports button -->
+    <button class="btn btn-secondary m-2 btn-rounded" type="button" (click)="backtoreports()"> Back</button>
+
+</div>

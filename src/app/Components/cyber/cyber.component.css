@@ -1,0 +1,9 @@
+form{
+    width: 50%;
+    margin: auto;
+}
+
+label, .label{
+    color: rgb(11, 11, 209);
+    font-size: 18px;
+}
