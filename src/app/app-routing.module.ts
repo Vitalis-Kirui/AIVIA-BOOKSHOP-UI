@@ -19,30 +19,67 @@ import { UpdateStaffComponent } from './Components/update-staff/update-staff.com
 import { UpdateStockComponent } from './Components/update-stock/update-stock.component';
 import { VerificationComponent } from './Components/verification/verification.component';
 import { VerifyGuard } from './Guards/verify.guard';
+import { StaffGuard } from './Guards/staff-access.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'verify', component: VerificationComponent },
-  { path: 'adding', component: AddingComponent, canActivate:[VerifyGuard] },
-  { path: 'cyber', component: CyberComponent, canActivate:[VerifyGuard] },
-  { path: 'expenses', component: ExpensesComponent, canActivate:[VerifyGuard] },
-  { path: 'reports', component: ReportsComponent, canActivate:[VerifyGuard] },
-  { path: 'sales', component: SalesComponent, canActivate:[VerifyGuard] },
-  { path: 'staffs', component: StaffsComponent, canActivate:[VerifyGuard] },
-  { path: 'menu', component: MenuComponent, canActivate:[VerifyGuard] },
-  { path: 'search', component: SearchComponent, canActivate:[VerifyGuard] },
-  { path: 'sales/full-report', component: SalesFullComponent, canActivate:[VerifyGuard] },
-  {path: 'expenses/full-report', component: ExpensesFullComponent, canActivate:[VerifyGuard]},
-  {path: 'cyber/full-report', component: CyberFullComponent, canActivate:[VerifyGuard]},
-  { path: 'staffs/staff/:id', component: StaffDetailsComponent, canActivate:[VerifyGuard] },
-  { path: 'adding/stocks/stock/:id', component: StockDetailsComponent , canActivate:[VerifyGuard]},
-  { path: 'adding/stocks/update-stock/:id', component: UpdateStockComponent, canActivate:[VerifyGuard] },
-  { path: 'staffs/update-staff/:id', component: UpdateStaffComponent, canActivate:[VerifyGuard] },
+  { path: 'adding', component: AddingComponent, canActivate: [VerifyGuard] },
+  { path: 'cyber', component: CyberComponent, canActivate: [VerifyGuard] },
+  {
+    path: 'expenses',
+    component: ExpensesComponent,
+    canActivate: [VerifyGuard],
+  },
+  { path: 'reports', component: ReportsComponent, canActivate: [VerifyGuard] },
+  { path: 'sales', component: SalesComponent, canActivate: [VerifyGuard] },
+  {
+    path: 'staffs',
+    component: StaffsComponent,
+    canActivate: [VerifyGuard, StaffGuard],
+  },
+  { path: 'menu', component: MenuComponent, canActivate: [VerifyGuard] },
+  { path: 'search', component: SearchComponent, canActivate: [VerifyGuard] },
+  {
+    path: 'sales/full-report',
+    component: SalesFullComponent,
+    canActivate: [VerifyGuard],
+  },
+  {
+    path: 'expenses/full-report',
+    component: ExpensesFullComponent,
+    canActivate: [VerifyGuard],
+  },
+  {
+    path: 'cyber/full-report',
+    component: CyberFullComponent,
+    canActivate: [VerifyGuard],
+  },
+  {
+    path: 'staffs/staff/:id',
+    component: StaffDetailsComponent,
+    canActivate: [VerifyGuard, StaffGuard],
+  },
+  {
+    path: 'adding/stocks/stock/:id',
+    component: StockDetailsComponent,
+    canActivate: [VerifyGuard],
+  },
+  {
+    path: 'adding/stocks/update-stock/:id',
+    component: UpdateStockComponent,
+    canActivate: [VerifyGuard],
+  },
+  {
+    path: 'staffs/update-staff/:id',
+    component: UpdateStaffComponent,
+    canActivate: [VerifyGuard, StaffGuard],
+  },
   { path: '**', component: Error404Component },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

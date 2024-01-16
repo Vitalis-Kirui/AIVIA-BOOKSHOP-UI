@@ -12,4 +12,9 @@ export class ActiveStaffService {
     return !!localStorage.getItem('active staff');
   }
 
+  // Getting the active staff number
+  activestaff_number() {
+    return localStorage.getItem('active staff');
+  }
+
 }

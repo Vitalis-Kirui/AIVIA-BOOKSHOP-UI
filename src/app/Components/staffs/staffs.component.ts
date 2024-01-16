@@ -1,39 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActiveStaffService } from 'src/app/Services/active-staff.service';
 import { StaffService } from 'src/app/Services/staff.service';
 
 @Component({
   selector: 'app-staffs',
   templateUrl: './staffs.component.html',
-  styleUrls: ['./staffs.component.css']
+  styleUrls: ['./staffs.component.css'],
 })
 export class StaffsComponent implements OnInit {
-
   // Form variable
   newstaffform!: UntypedFormGroup;
 
+  // Active staff number
+  active_staffnumber: any;
+
   // Work stations
-  stations: any = ['All', 'Chebunyo', 'Kaboson']
+  stations: any = ['All', 'Chebunyo', 'Kaboson'];
 
   // Gender
-  genders: any = ['Male', 'Female']
+  genders: any = ['Male', 'Female'];
 
   // Roles
-  roles: any = ['CEO', 'Management', 'Supervisor', 'Attendant']
+  roles: any = ['CEO', 'Management', 'Supervisor', 'Attendant'];
 
   // Display variables
   seeexistingstaffs: boolean = false;
   addnewstaff: boolean = false;
 
-  constructor(private router:Router, private fbservice:UntypedFormBuilder, private staffservice : StaffService) { }
+  constructor(
+    private router: Router,
+    private fbservice: UntypedFormBuilder,
+    private staffservice: StaffService,
+    private activestaff_service : ActiveStaffService
+  ) {}
 
   // Existing staff function
   existingstaffs() {
-    
     this.seeexistingstaffs = true;
     this.addnewstaff = false;
-
   }
 
   // Staffs array
@@ -41,35 +51,29 @@ export class StaffsComponent implements OnInit {
 
   // Add new staff function
   addstaff() {
-
     this.addnewstaff = true;
     this.seeexistingstaffs = false;
-    
   }
 
   // Submit staff function
   submitstaff() {
-
     // Posting new staff to database
-    this.staffservice.registernewstaff(this.newstaffform.value)
-      .subscribe(success => {
-        console.log(success)          
-    this.newstaffform.reset();
-window.location.reload();
+    this.staffservice.registernewstaff(this.newstaffform.value).subscribe(
+      (success) => {
+        console.log(success);
+        this.newstaffform.reset();
+        window.location.reload();
       },
-        error => {
-          console.log(error);
-          this.newstaffform.reset();
-      })
-
-    
+      (error) => {
+        console.log(error);
+        this.newstaffform.reset();
+      }
+    );
   }
 
   // Expand function
   expandstaff(id: any) {
-
-    this.router.navigate(['staffs/staff/', id])
-    
+    this.router.navigate(['staffs/staff/', id]);
   }
 
   // Go back function
@@ -78,7 +82,6 @@ window.location.reload();
   }
 
   ngOnInit() {
-
     // Form model
     this.newstaffform = this.fbservice.group({
       firstname: ['', [Validators.required, Validators.minLength(3)]],
@@ -90,19 +93,24 @@ window.location.reload();
       role: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       workstation: ['', [Validators.required]],
-      monthlysalary: ['', [Validators.required]]
-    })
+      monthlysalary: ['', [Validators.required]],
+    });
 
     // Fetching all the staffs
-    this.staffservice.getallstaffs()
-      .subscribe(data => {
+    this.staffservice.getallstaffs().subscribe(
+      (data) => {
         this.allstaffs = data.staffs;
-        console.log(this.allstaffs);          
+        console.log(this.allstaffs);
       },
-        error => {
+      (error) => {
         console.log(error);
-      })
+      }
+    );
 
+    // Fetching active staff item from local storage
+    this.active_staffnumber = this.activestaff_service.activestaff_number();
+
+    console.log("The active staff is is: ",this.active_staffnumber);
   }
 
   // GETTER FUNCTIONS
@@ -174,5 +182,4 @@ window.location.reload();
       onlySelf: true,
     });
   }
-
 }
