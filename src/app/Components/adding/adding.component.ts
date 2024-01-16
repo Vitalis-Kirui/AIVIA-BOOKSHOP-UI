@@ -98,6 +98,7 @@ export class AddingComponent implements OnInit {
       },
         error => {
           console.log(error);
+          this.stockadditionform.reset();
       })
 
   }

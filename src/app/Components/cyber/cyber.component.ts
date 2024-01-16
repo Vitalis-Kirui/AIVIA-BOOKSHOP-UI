@@ -69,7 +69,8 @@ export class CyberComponent implements OnInit {
         this.cyberform.reset();
       },
         error =>{
-        console.log(error);
+          console.log(error);
+          this.cyberform.reset();
       })
   }
 

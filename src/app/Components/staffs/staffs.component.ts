@@ -59,6 +59,7 @@ window.location.reload();
       },
         error => {
           console.log(error);
+          this.newstaffform.reset();
       })
 
     

@@ -33,7 +33,8 @@ export class SalesComponent implements OnInit {
         this.salesform.reset();
       },
         error => {
-        console.log(error);
+          console.log(error);
+          this.salesform.reset();
       })
     
   }

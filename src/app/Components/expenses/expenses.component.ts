@@ -49,7 +49,8 @@ export class ExpensesComponent implements OnInit {
     this.expenseform.reset();       
       },
         error => {
-        console.log(error);
+          console.log(error);
+          this.expenseform.reset();
       })
 
   }
